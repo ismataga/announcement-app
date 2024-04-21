@@ -14,9 +14,18 @@ services:
       ports:
         - "3306:3306"
 
+    custom-redis:
+      image: redis
+      container_name: announcement-redis
+      ports:
+        - '6379:6379'
+      volumes:
+        - db:/data
+
+
 
     myapp:
-     image: msannouncement:v1
+     image: msann:v1
      ports:
        - '8090:8090'
 #     networks:
