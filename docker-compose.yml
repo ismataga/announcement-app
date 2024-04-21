@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+    mysql:
+      container_name: mysql
+#      hostname: test
+      image: mysql:latest
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+      volumes:
+        - db:/var/lib/mysql
+      ports:
+        - "3306:3306"
+
+
+    myapp:
+     image: msannouncement:v1
+     ports:
+       - '8090:8090'
+#     networks:
+#       - custom-network
+     depends_on:
+       - mysql
+     environment:
+       HOST : mysql
+       PORT : 3306
+
+
+
+volumes:
+  db:
+  dbp:
+
+#networks:
+#  custom-network:
